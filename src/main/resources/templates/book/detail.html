@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Gerne</th>
+            <th>Publisher</th>
+        </tr>
+        <tr th:each="book: ${bookDetails}">
+            <td th:text="${book.bookId}"></td>
+            <td th:text="${book.bookName}"></td>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.gerne}"></td>
+            <td th:text="${book.publisherCatalog.getPublisherName()}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

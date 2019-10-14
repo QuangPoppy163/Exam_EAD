@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create book</title>
+    <style>
+        body {font-family: Arial, Helvetica, sans-serif;}
+        form {border: 3px solid #f1f1f1;}
+
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        .cancelbtn {
+            width: auto;
+            padding: 10px 18px;
+            background-color: #f44336;
+        }
+
+        .imgcontainer {
+            text-align: center;
+            margin: 24px 0 12px 0;
+        }
+
+        img.avatar {
+            width: 40%;
+            border-radius: 50%;
+        }
+
+        .container {
+            padding: 16px;
+        }
+
+        span.psw {
+            float: right;
+            padding-top: 16px;
+        }
+
+        /* Change styles for span and cancel button on extra small screens */
+        @media screen and (max-width: 300px) {
+            span.psw {
+                display: block;
+                float: none;
+            }
+            .cancelbtn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div style="margin-left:  35%">
+    <h1>Create book</h1>
+    <form th:action="@{/book/create}" th:method="post" th:object="${book}" style="width: 50%">
+        <div class="container">
+            <label><b>Name</b></label>
+            <input type="text" th:field="*{bookName}">
+            <span class="error" th:if="${#fields.hasErrors('bookName')}" th:errors="*{bookName}"></span></br>
+
+            <label><b>Author</b></label>
+            <input type="text"  th:field="*{author}">
+            <span class="error" th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></span></br>
+
+            <label><b>Genre</b></label>
+            <input type="text"  th:field="*{gerne}">
+            <span class="error" th:if="${#fields.hasErrors('gerne')}" th:errors="*{gerne}"></span></br>
+
+            <label><b>Publisher</b></label>
+            <select type="text"  th:field="*{publisherCatalog}" th:each="publisherCatalog : ${publisherCatalogs}">
+                <option th:value="${publisherCatalog.publisherId}" th:text="${publisherCatalog.publisherName}"></option>
+            </select>
+            <span class="error" th:if="${#fields.hasErrors('publisherCatalog')}" th:errors="*{publisherCatalog}"></span></br>
+
+            <button type="submit">Create</button>
+            <button type="reset">Cancel</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
